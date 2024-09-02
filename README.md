@@ -20,9 +20,9 @@ bash
 ```
 STAR --runMode genomeGenerate \
      --runThreadN 5 \
-     --genomeFastaFiles ./Homo_sapiens.GRCh38.dna.primary_assembly.fa \
+     --genomeFastaFiles ./Mus_musculus.GRCm39.dna.primary_assembly.fa  \
      --genomeDir ./STAR_index/ \
-     --sjdbGTFfile ./Homo_sapiens.GRCh38.111.gtf \
+     --sjdbGTFfile ./Mus_musculus.GRCm39.112.chr.gtf \
      --sjdbOverhang 149
 ```
 ### 4.2 STAR mapping
@@ -31,9 +31,9 @@ Next, we align the cleaned reads to the reference genome using STAR. This step p
 for i in $(cat $path_raw_read/samplelist.txt); do
     STAR --runThreadN 10 \
          --genomeDir /home/boot/qiangsu/ref/STAR_index/ \
-         --readFilesIn /home/boot/qiangsu/drug_pool/TCM_process_data/trimmed_data/${i}_trim_1P.fastq /home/boot/qiangsu/drug_pool/TCM_process_data/trimmed_data/${i}_trim_2P.fastq \
+         --readFilesIn /home/boot/trimmed_data/${i}_trim_1P.fastq /home/boot/trimmed_data/${i}_trim_2P.fastq \
          --sjdbOverhang 149 \
-         --outFileNamePrefix /home/boot/qiangsu/drug_pool/TCM_process_data/sam_data/${i}- \
+         --outFileNamePrefix /home/boot/process_data/sam_data/${i}- \
          --outSAMtype BAM SortedByCoordinate \
          --twopassMode Basic \
          --quantMode TranscriptomeSAM GeneCounts \
